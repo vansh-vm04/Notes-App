@@ -1,0 +1,1 @@
+{"root":["./src/db.ts","./src/index.ts","./src/middleware.ts","./src/model.ts","./src/route.ts","./src/@types/express/index.d.ts","./src/utils/mailservice.ts","./src/utils/otp.ts"],"version":"5.9.2"}
