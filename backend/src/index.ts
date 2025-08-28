@@ -1,9 +1,23 @@
 import express from "express"
 import cors from "cors"
+import { configDotenv } from "dotenv";
+import { dbConnect } from "./db";
 
 const app = express();
-
 const port = 3000;
+const frontend_origin = process.env.FRONTEND_URL;
+
+app.use(
+  cors({
+    origin: frontend_origin,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','PATCH']
+  })
+);
+
+configDotenv();
+
+dbConnect();
 
 app.use(express.json());
 
