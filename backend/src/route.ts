@@ -20,7 +20,7 @@ router.post('/request-otp',async(req:Request,res:Response)=>{
 
         if(type=="signup"){
             if(user) return res.status(409).json({message:"User already exist"});
-            await UserModel.findOneAndUpdate({
+            await UserModel.create({
                 name,
                 email
             })
@@ -33,11 +33,9 @@ router.post('/request-otp',async(req:Request,res:Response)=>{
             expiresAt
         },{upsert:true, new:true})
         const emailSent = await sendOtpMail(email,otp);
-        // console.log(otp)
         if(!emailSent) return res.status(500).json({message:"Error sending otp"});
         res.status(200).json({message:"Otp sent"})
     } catch (error) {
-        console.log(error)
         res.status(500).json({message:"Internal server error"})
     }
 })
@@ -88,8 +86,8 @@ router.patch('/note',authMiddleware ,async (req:Request,res:Response)=>{
     }
 })
 
-router.delete('/note',authMiddleware, async (req:Request,res:Response)=>{
-    const {noteId} = req.body;
+router.delete('/note/:noteId',authMiddleware, async (req:Request,res:Response)=>{
+    const {noteId} = req.params;
     try {
         const userId = req.userId;
         await NoteModel.findOneAndDelete({userId,_id:noteId});
