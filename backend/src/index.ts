@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors"
 import { configDotenv } from "dotenv";
 import { dbConnect } from "./db";
-
+import router from "./route";
 const app = express();
 const port = 3000;
 const frontend_origin = process.env.FRONTEND_URL;
@@ -20,6 +20,8 @@ configDotenv();
 dbConnect();
 
 app.use(express.json());
+
+app.use('/api',router);
 
 app.get('/api/health', async(req,res)=>{
     res.status(200).json({message:"Server is alive"})
