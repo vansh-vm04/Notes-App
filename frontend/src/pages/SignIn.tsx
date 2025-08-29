@@ -85,7 +85,7 @@ export default function SignIn() {
           isLoading: false,
         });
       }
-      console.log(err);
+      // console.log(err);
     } finally {
       setLoading(false);
     }
@@ -135,7 +135,7 @@ export default function SignIn() {
           isLoading: false,
         });
       }
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
     }
@@ -160,7 +160,7 @@ export default function SignIn() {
           <h2 className="text-3xl font-bold mb-2">Sign in</h2>
           <p className="text-gray-500 mb-6">Please sign in to continue.</p>
           <form
-            className="max-w-2xl flex flex-col items-center"
+            className="max-w-2xl w-full flex flex-col items-center"
             onSubmit={handleSubmit}
           >
             <input

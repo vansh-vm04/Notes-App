@@ -85,7 +85,6 @@ export default function Signup() {
           isLoading: false,
         });
       }
-      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -135,7 +134,7 @@ export default function Signup() {
           isLoading: false,
         });
       }
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
     }
@@ -162,7 +161,7 @@ export default function Signup() {
             Sign up to keep your notes organized
           </p>
           <form
-            className="max-w-2xl flex flex-col items-center"
+            className="max-w-2xl flex w-full flex-col items-center"
             onSubmit={handleSubmit}
           >
             <input
