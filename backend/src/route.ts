@@ -71,7 +71,7 @@ router.post('/note',authMiddleware ,async (req:Request,res:Response)=>{
             note,
             userId
         })
-        res.status(200).json({note,_id:newNote._id});
+        res.status(200).json({note:newNote});
     } catch (error) {
         res.status(500).json({message:"Internal server error"})
     }
@@ -82,7 +82,7 @@ router.patch('/note',authMiddleware ,async (req:Request,res:Response)=>{
     try {
         const userId = req.userId;
         const newNote = await NoteModel.findOneAndUpdate({userId,_id:noteId},{note:note},{new:true});
-        res.status(200).json({note,_id:newNote?._id});
+        res.status(200).json({note:newNote});
     } catch (error) {
         res.status(500).json({message:"Internal server error"})
     }
@@ -106,6 +106,16 @@ router.get('/note',authMiddleware ,async (req:Request,res:Response)=>{
         res.status(200).json({notes});
     } catch (error) {
         res.status(500).json({message:"Notes not found"});
+    }
+})
+
+router.get('/verify-user',authMiddleware,async (req:Request,res:Response)=>{
+    const userId = req.userId;
+    try {
+        const user = await UserModel.findById(userId);
+        res.status(200).json({message:"Success",user:{name:user?.name,email:user?.email}});
+    } catch (error) {
+        res.status(500).json({message:"Internal server error"})
     }
 })
 
