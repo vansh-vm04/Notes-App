@@ -238,6 +238,8 @@ export default function SignIn() {
           <GoogleLogin
             text="signin_with"
             theme="filled_blue"
+            width="100%"
+            size="large"
             onSuccess={(credentialResponse) =>googleAuth(credentialResponse.credential as string)}
             onError={() => {
               toast.error("Something went wrong");
