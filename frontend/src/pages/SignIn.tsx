@@ -234,7 +234,7 @@ export default function SignIn() {
           </form>
 
           <Divider />
-          <div className="w-full">
+          <div className="w-full flex justify-center">
           <GoogleLogin
             text="signin_with"
             theme="filled_blue"
