@@ -244,7 +244,7 @@ export default function Signup() {
           </form>
 
           <Divider />
-
+          <div className="w-full">
           <GoogleLogin
             text="signup_with"
             theme="filled_blue"
@@ -255,6 +255,7 @@ export default function Signup() {
               toast.error("Something went wrong");
             }}
           />
+          </div>
         </div>
       </div>
 
