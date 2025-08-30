@@ -4,6 +4,8 @@ import AppLogo from "../components/AppLogo";
 import { useAuth } from "../hooks/useAuth";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { GoogleLogin } from "@react-oauth/google";
+import Divider from "../components/Divider";
 const env = import.meta.env;
 
 export default function Signup() {
@@ -42,6 +44,22 @@ export default function Signup() {
   useEffect(() => {
     autoLogin();
   }, []);
+
+  const googleAuth = async (credential:string)=>{
+    try {
+      const res = await axios.post(`${env.VITE_BACKEND_URL}/api/google-auth`,
+        {
+          credential
+        }
+      );
+      const token = res.data.token;
+      localStorage.setItem('token',token);
+      navigate('/');
+      toast.success("Signup Successful");
+    } catch{
+      toast.error("Something went wrong");
+    }
+  }
 
   const handleOtp = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -224,6 +242,17 @@ export default function Signup() {
               </span>
             </p>
           </form>
+
+          <Divider />
+
+          <GoogleLogin
+            text="signup_with"
+            theme="filled_blue"
+            onSuccess={(credentialResponse) =>googleAuth(credentialResponse.credential as string)}
+            onError={() => {
+              toast.error("Something went wrong");
+            }}
+          />
         </div>
       </div>
 
