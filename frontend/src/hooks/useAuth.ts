@@ -1,4 +1,5 @@
 import axios from "axios"
+import { googleLogout } from "@react-oauth/google";
 const env = import.meta.env;
 
 const verify = async () =>{
@@ -28,6 +29,7 @@ const verify = async () =>{
 const logOut = () =>{
     localStorage.removeItem('token');
     window.location.replace(`${env.VITE_FRONTEND_URL}/signin`);
+    googleLogout();
 }
 
 export const useAuth = () =>{
