@@ -3,9 +3,11 @@ import cors from "cors"
 import { configDotenv } from "dotenv";
 import { dbConnect } from "./db";
 import router from "./route";
+
+configDotenv();
 const app = express();
-const port = 3000;
 const frontend_origin = process.env.FRONTEND_URL;
+const PORT = process.env.PORT || 3000;
 
 app.use(
   cors({
@@ -14,8 +16,6 @@ app.use(
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','PATCH']
   })
 );
-
-configDotenv();
 
 dbConnect();
 
@@ -27,6 +27,6 @@ app.get('/api/health', async(req,res)=>{
     res.status(200).json({message:"Server is alive"})
 })
 
-app.listen(port,()=>{
+app.listen(PORT,()=>{
     console.log("Server is connected")
 })
